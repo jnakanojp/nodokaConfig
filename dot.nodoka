@@ -1,0 +1,79 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Nodoka - dotjp.nodoka
+# Copyright (C) 1999-2005, TAGA Nayuta <nayuta@users.sourceforge.net>
+#
+# Modify by applet on 2010-03-29
+
+
+
+# まずキーボード定義を読み込む。
+if ( USE104 )
+  include "104.nodoka"			# 104 キーボード設定
+  if ( USE109on104 )
+    include "109on104.nodoka"		# 104 キーボードを 109 キーボード風に
+  endif
+else
+  include "109.nodoka"			# 109 キーボード設定
+   mod control += 英数				# 英数を Control に
+   key *英数		= *LControl		#	〃
+  if ( USE104on109 )
+    include "104on109.nodoka"		# 109 キーボードを 104 キーボード風に
+  endif
+  if ( USEDVORAKon109 )
+    include "DVORAKon109jnakano.nodoka"
+  endif
+  if ( USEDVORAKonTECK )
+    include "DVORAKonTECKjnakano.nodoka"
+  endif	
+  if ( USEDVORAKonTECK109 )
+    include "DVORAKonTECK109jnakano.nodoka"
+  endif
+endif
+
+if ( USEdefault )
+  include	"default2.nodoka"	# Emacs ライクなさまざまな設定
+endif
+
+# Global keymap 設定
+keymap Global
+def option KeyboardDelay = enable 0 15
+
+#def option sts4nodoka=enable
+#def option CenterVal = 3200
+#include "thumbsense.nodoka"
+
+
+# 以下は、便宜上、設定するもの
+key C-A-D = &DescribeBindings 		# 現在のキーマップのログ出力
+key F1 = &SendPostMessage("PostTray",,"のどか", 0x0205, 0, 0)	# のどかのメニューを開く
+
+
+# シフト+F2: 日本語キーボード、英語キーボード 切り替えトグル
+#if ( USE109 )
+#  if ( USE104on109 )
+#    key S-F2 => &IconColor(0) &HelpMessage("Reloaded", "日本語 109 キーボード") &LoadSetting("日本語 109 キーボード")
+#  else
+#    key S-F2 => &IconColor(2) &HelpMessage("Reloaded", "日本語 109 キーボード (104 風)") &LoadSetting("日本語 109 キーボード (104 風)")
+#  endif
+#endif
+#if ( USE104 )
+#  if ( USE109on104 )
+#    key S-F2 => &IconColor(0) &HelpMessage("Reloaded", "英語 104 キーボード") &LoadSetting("英語 104 キーボード")
+#  else
+#    key S-F2 => &IconColor(2) &HelpMessage("Reloaded", "英語 104 キーボード (109 風)") &LoadSetting("英語 104 キーボード (109 風)")
+#  endif
+#endif
+  if ( USEDVORAKonTECK )
+    key S-F2 => &IconColor(0) &HelpMessage("Reloaded", "日本語 109 キーボード") &LoadSetting("日本語 109 キーボード")
+  else
+    if ( USEDVORAKon109 )
+      key S-F2 => &IconColor(3) &HelpMessage("Reloaded", "日本語 109 キーボード (TECK,Dvorak)") &LoadSetting("日本語 109 キーボード (TECK,Dvorak)")
+    else
+      key S-F2 => &IconColor(2) &HelpMessage("Reloaded", "日本語 109 キーボード (Dvorak)") &LoadSetting("日本語 109 キーボード (Dvorak)")
+    endif
+  endif
+
+# 以下に、ご自身の設定を御書き下さい。
+
+
+

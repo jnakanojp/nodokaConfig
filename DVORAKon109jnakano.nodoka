@@ -1,0 +1,87 @@
+#
+# DVORAKon109.nodoka - dvorak layout on 109 layout for のどか
+#
+# modify by applet. 2008/07/29
+# modified by jnakano 2012/05/21
+#
+# dvorakキー配列を109キー上に実現する。
+# キー配列は、以下のようになる。空白の部分は変更しない。
+# S-0 が ~ になることと、S-^ が _ になることを除けば、キー位置を交換し、
+# ]} であった位置に Contol を置いただけ。(\_ は不要になるため。)
+#
+# ----------------------------------------------------------------------------
+# |  ~ |  ! |  @ |  # |  $ |  % |  ^ |  & |  * |  ( |  ) |  { |  } |  | |    |
+# | `  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 0  | [  | ]  | \  |    |
+# ----------------------------------------------------------------------------
+# |       |  " |  < |  > |  P |  Y |  F |  G |  C |  R |  L |  - |  + |      |
+# |       | '  | ,  | .  |    |    |    |    |    |    |    | /  | =  |      |
+# ----------------------------------------------------------------------     |
+# |        |  A |  O |  E |  U |  I |  D |  H |  T |  N |  S |  _ |  | |     |
+# |        |    |    |    |    |    |    |    |    |    |    | -  | \  |     |
+# ----------------------------------------------------------------------------
+# |          |  : |  Q |  J |  K |  X |  B |  M |  W |  V |  Z |  ~ |        |
+# |          | ;  |    |    |    |    |    |    |    |    |    | `  |        |
+# ----------------------------------------------------------------------------
+#
+
+# 一段目
+def subst ~S-*半角/全角				=  $GRAVE_ACCENT
+def subst  S-*半角/全角				=  $TILDE
+def subst  S-*_2		= $COMMERCIAL_AT
+def subst  S-*_6		= $CIRCUMFLEX_ACCENT
+def subst  S-*_7		= $AMPERSAND
+def subst  S-*_8		= $ASTERISK
+def subst  S-*_9		= $LEFT_PARENTHESIS
+def subst  S-*_0		= $RIGHT_PARENTHESIS
+def subst ~C-~A-~W-*Minus			= *LeftSquareBracket
+def subst ~C-~A-~W-*CircumflexAccent		= *RightSquareBracket
+
+# 二段目
+def subst ~C-~A-~W-~S-*Q				= $APOSTROPHE
+def subst ~C-~A-~W-S-*Q				= $QUOTATION_MARK
+def subst ~C-~A-~W-*W				= *Comma
+def subst ~C-~A-~W-*E				= *Period
+def subst ~C-~A-~W-*R				= *P
+def subst ~C-~A-~W-*T				= *Y
+def subst ~C-~A-~W-*Y				= *F
+def subst ~C-~A-~W-*U				= *G
+def subst ~C-~A-~W-*I				= *C
+def subst ~C-~A-~W-*O				= *R
+def subst ~C-~A-~W-*P				= *L
+def subst ~C-~A-~W-*Atmark			= *Slash
+def subst ~C-~A-~W-~S-*LeftSquareBracket		= $EQUALS_SIGN
+def subst ~C-~A-~W-S-*LeftSquareBracket 	= $PLUS_SIGN
+
+# 三段目
+def subst ~C-~A-~W-*A				= *A
+def subst ~C-~A-~W-*S				= *O
+def subst ~C-~A-~W-*D				= *E
+def subst ~C-~A-~W-*F				= *U
+def subst ~C-~A-~W-*G				= *I
+def subst ~C-~A-~W-*H				= *D
+def subst ~C-~A-~W-*J				= *H
+def subst ~C-~A-~W-*K				= *T
+def subst ~C-~A-~W-*L				= *N
+def subst ~C-~A-~W-*Semicolon			= *S
+def subst ~C-~A-~W-~S-*Colon			= *Minus
+def subst ~C-~A-~W-S-*Colon = $LOW_LINE
+def subst ~C-~A-~W-~S-*RightSquareBracket		= $REVERSE_SOLIDUS
+def subst ~C-~A-~W-S-*RightSquareBracket         = $VERTICAL_LINE
+
+# 四段目
+def subst ~C-~A-~W-~S-*Z				= *Semicolon
+def subst ~C-~A-~W-S-*Z				= $COLON
+def subst ~C-~A-~W-*X				= *Q
+def subst ~C-~A-~W-*C				= *J
+def subst ~C-~A-~W-*V				= *K
+def subst ~C-~A-~W-*B				= *X
+def subst ~C-~A-~W-*N				= *B
+def subst ~C-~A-~W-*M				= *M
+def subst ~C-~A-~W-*Comma			= *W
+def subst ~C-~A-~W-*Period			= *V
+def subst ~C-~A-~W-*Slash			= *Z
+def subst ~C-~A-~W-~S-*BackSlash			= $GRAVE_ACCENT
+def subst ~C-~A-~W-S-*BackSlash			= $TILDE
+
+key *変換 = &SetImeStatus(off)
+key *ひらがな = &SetImeStatus(on)
